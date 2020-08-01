@@ -1,0 +1,125 @@
+------------------------------------------------------------------------
+Cameron Watson | Bi622 | Demultiplexing Assignment 1, Part 2 Psuedocode
+------------------------------------------------------------------------
+
+Five input files:
+
+• R1: contains 'forward' read of insert reverse complement
+• R2: index 1 reverse complement
+• R3: index 2 original sequence
+• R4: contains 'reverse' read of insert original sequence
+• indices file: a plain text file containing the 24 unique 8 nucleotide indices
+
+Records between files correspond with each other
+(record 1 of R2 is the index for record 1 of R1 and so on)
+
+The goal is to parse these into separate files:
+
+48 files containing records with a matching duel index (forward and reverse in separate files)
+
+one file with all records with unmatched indices (index hopped)
+
+one file with all records with at least one index that is low quality or containing an uncalled base (N)
+
+this script will also output one additional file with the following statistics:
+    - Number of read pairs with matched indices per index pair
+    - Number of index hopped read pairs
+    - Number of read pairs with at least one unknown index
+    - Number of read pairs for every combination of viable index pairs
+
+----------------------------------------------------------------------------------------------------------
+
+• make an object* that contains the 24 unique indices
+   open indices file (tab separated, with index sequence in fifth column)
+        iterate over the lines
+        for each line, split it by tab character, and retain only the fifth element (regex)
+        append the element to the object
+
+    * currently undecided. I want the efficiency of a dict, but what would the value be?
+
+• use itertools to create a dictionary containing all possible viable index pairs as keys, initialize 
+  value to zero (will be used to count occurrence of each pairing)
+
+• initialize counters for matched pairs, index hopped pairs, and read pairs w an unknown index
+
+• Create and open output files iteratively 
+
+    file names will include one of the 24 indices and forward or reverse
+
+• unzip and open the four input files (R1-R4) 
+
+• Initiate a line counter that will increment as the lines of the file are looped through
+
+• capture the first four lines of each input file, and store as temporary variables in an object
+
+    remove newline char from each line here?
+
+• reverse complement index 2
+
+    create a dictionary with complementary base pairs as keys and values, with N mapping to N
+    for the tenth element in the object (index 2 sequence), replace each character
+    with the char's correponding dictionary value by iterating over the chars in the string
+
+• Pass object through a function that formats the indices into the read (R1, R4) header lines
+
+def insert_indices(object):
+    '''This function formats the header lines of fastq records to contain their respective index sequences'''
+    create a variable called comb_indices and set equal to string concatenation of ":", index 1 seq, "-", then 
+    index 2 seq
+    take the header lines from the object, and concatenate comb_indices to the end of each
+    return object with updated header lines
+
+In: a list with the first four lines of each file as separate elements
+Out: header lines formatted like this in their original place in the list:
+     @NS500451:154:SJDFSDFV:1....:AAAAAAAA-AAAAAAAA
+
+• Check to see if index 1 matches one of the 24 known indices
+
+if it doesn't match a known index
+    increment a counter that counts the number of read pairs containing an unknown index 
+    output the reads with updated headers to a file: unknowns/poor quality
+
+• Check to see if index 2 matches one of the 24 known indices, same method
+
+if there's a match:
+
+• Check the quality of index 1 (R2)
+
+def phred_check(string):
+        '''Calculates the phred score at each position in a string. If string meets 
+           cut-off criteria, return True. if string falls below cut-off, return False'''
+           use ord to convert ASCII to int at each position, subtract 33 to get phred score
+           check each position value, if any positions below Q20, return False
+        return True/False
+
+In: "AAAAAAAA"
+out: True
+
+In: "AAAAAAA&"
+out: False (the amperand returns a score of 5, causing this index to fail the cut-off)
+
+if it does not pass the quality check (phred_check is False):
+    output records to unknown/poor quality file
+
+if it passes the quality check (phred_check is True):
+
+• Check the quality of index 2 (R3) the same way as index 1
+
+if it does not pass the quality check (phred_check is False):
+    output records to unknown/poor quality file
+
+if it passes the quality check (phred_check is True):
+
+• See if index 1 and index 2 are identical
+
+not identical, output records to index-hopped file and increment the corresponding index pair dict counter
+also increment the total index hopped counter
+
+identical, output forward/reverse records to separate files as specified above,
+increment index pair dict counter and increment total match counter
+
+• this will run for all lines in all files
+
+• Close files at the end
+
+• Write the various counters and statistics out to a separate file 
