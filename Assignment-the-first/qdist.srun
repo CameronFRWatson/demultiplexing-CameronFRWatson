@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH --partition=bgmp
+#SBATCH --job-name=qdist_test
+#SBATCH --time=0-08:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --account=bgmp
+
+/usr/bin/time -v ./qscore_dist.py \
+-f /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz \
+-r 101 \
+-t 'Read 1' \
+-p '1294_S1_L008_R1_001' 
+
+/usr/bin/time -v ./qscore_dist.py \
+-f /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz \
+-r 8 \
+-t 'Index 1' \
+-p '1294_S1_L008_R2_001' 
+
+/usr/bin/time -v ./qscore_dist.py \
+-f /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz \
+-r 8 \
+-t 'Index 2' \
+-p '1294_S1_L008_R3_001' 
+
+/usr/bin/time -v ./qscore_dist.py \
+-f /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz \
+-r 101 \
+-t 'Read 2' \
+-p '1294_S1_L008_R4_001'
