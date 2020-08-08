@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --partition=bgmp
+#SBATCH --job-name=demultiplexing
+#SBATCH --time=0-15:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --account=bgmp
+
+/usr/bin/time -v ./demultiplex.py \
+-i /projects/bgmp/shared/2017_sequencing/indexes.txt \
+-a /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz \
+-b /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz \
+-c /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz \
+-d /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz
+
+ls -1 *.fastq | while read fqfile; do gzip $fqfile; done
