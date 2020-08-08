@@ -11,7 +11,7 @@ slurm standard out: dplex_slurm.out
 Note: As of August, 7 2020, demultiplex.py is functional but very much a rough draft.
 I plan to refactor quite a bit.
 
-See dplex.srun for the specific options that demultiplex.py was ran with.
+See dplex.srun for the specific options that demultiplex.py was run with.
 
 ## Quality Cut-off justification
 
