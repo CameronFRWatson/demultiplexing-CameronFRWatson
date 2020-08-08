@@ -1,14 +1,21 @@
-# A brief summary of Bi622 Demultiplexing Assignment 3 - Cameron Watson
+## A brief summary of Bi622 Demultiplexing Assignment 3 - Cameron Watson
 
 script: demultiplex.py
+
 output: demultiplex_stats.txt
+
 slurm script: dplex.srun
+
 slurm standard out: dplex_slurm.out
 
 Note: As of August, 7 2020, demultiplex.py is functional but very much a rough draft.
 I plan to refactor quite a bit.
 
-See dplex.srun for the specific options that demultiplex.py was ran with.
+See dplex.srun for the specific options that demultiplex.py was run with.
+
+The zipped output files can be found on talapas at:
+
+/projects/bgmp/cwatson5/demultiplexing-CameronFRWatson/Assignment-the-third/
 
 ## Quality Cut-off justification
 
