@@ -13,10 +13,6 @@ I plan to refactor quite a bit.
 
 See dplex.srun for the specific options that demultiplex.py was run with.
 
-The zipped output files can be found on talapas at:
-
-/projects/bgmp/cwatson5/demultiplexing-CameronFRWatson/Assignment-the-third/
-
 ## Quality Cut-off justification
 
 If either index for a given read pair contained any nucleotide with a quality score
