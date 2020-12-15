@@ -7,12 +7,11 @@ This repository contains demultiplex.py, a tool for demultiplexing paired-end Il
 demultiplex.py can be called from the command line with the following arguments:
 
 ```
---read_one  R1 Fastq file (forward reads)
---read_two  R2 Fastq file (forward indices)
---read_three    R3 Fastq file (reverse indices)
---read_four R4 Fastq file (reverse reads)
---indices_file  Plain text file with a list of indices used
-
+--read_one         R1 Fastq file (forward reads)
+--read_two         R2 Fastq file (forward indices)
+--read_three       R3 Fastq file (reverse indices)
+--read_four        R4 Fastq file (reverse reads)
+--indices_file     Plain text file with a list of indices used
 ```
 
 Reads are demultiplexed by index pair, with matching pairs outputted to separate forward and reverse files (file names and read header are appended with their indices). Read pairs with non-matching indices (index-hopped) will be outputted to separate forward and reverse index-hopped files. Finally, a forward and a reverse file for read pairs with at least one unknown (N-containing) or low-quality index will also be outputted separately. 
