@@ -25,10 +25,10 @@ qscore_dist.py generates a per-base distribution of quality scores for a fastq f
 qscore_dist.py has the following arguments that can be called from the command-line:
 
 ```
---file  fastq file
---readlen   length of reads, in number of nucleotides
---plottitle plot title
---plotfile  name of file for plot (names is prepended to "_distplot.png")
+--file          fastq file
+--readlen       length of reads, in number of nucleotides
+--plottitle     plot title
+--plotfile      name of file for plot (names is prepended to "_distplot.png")
 ```
 
 Sample inputs, outputs, and supplemental files for both of these scripts can be found in the remaining subdirectories in this repository. Bash scripts for running the Python scripts as batch jobs on an HPC can also be found here.
