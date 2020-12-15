@@ -4,7 +4,7 @@
 
 This repository contains demultiplex.py, a tool for demultiplexing paired-end Illumina reads with dual matched indices. 
 
-demultiplex.py can be called from the commanf line with the following arguments:
+demultiplex.py can be called from the command line with the following arguments:
 
 ```
 --read_one  R1 Fastq file (forward reads)
